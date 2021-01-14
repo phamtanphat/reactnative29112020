@@ -1,14 +1,14 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {Text, View} from 'react-native';
-import {MainScreen , showInFo} from './src/screens/MainScreen';
+import {Text, View, SafeAreaView} from 'react-native';
+import MainScreen from './src/screens/MainScreen';
 
 export default class App extends Component {
   render() {
-    showInFo();
     return (
-      <View>
+      <SafeAreaView style={{flex : 1}}>
         <MainScreen />
-      </View>
+      </SafeAreaView>
     );
   }
 }

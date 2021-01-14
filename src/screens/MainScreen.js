@@ -1,20 +1,19 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
 import {Text, View} from 'react-native';
 
-export class MainScreen extends Component {
+export default class MainScreen extends Component {
   render() {
     return (
-      <View>
-        <Text> textInComponent </Text>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: 'antiquewhite',
+          flexDirection: 'column'
+        }}>
+        <Text> Text 1 </Text>
+        <Text> Text 2 </Text>
       </View>
     );
   }
 }
-
-export const showInFo = () => {
-  console.log('Main Screen');
-};
-
-// export default : export dang class
-// export : export nhìu , khi import bản chất là 1 object 
-// và không thay đổi tên của đối tượng export
