@@ -5,33 +5,43 @@ import {getWidth} from '../helpers/AppDimension';
 
 export default class MainScreen extends Component {
   render() {
-    const word = {en: 'One', vn: 'Một', isMemorized: false};
-    // true ? nút forgot (màu xanh) : Memorize (Màu đỏ)
-    // true ? ---- : nghĩa tiếng viêt
+    const words = [
+      {id: 1, en: 'One', vn: 'Một', isMemorized: false},
+      {id: 2, en: 'Two', vn: 'Hai', isMemorized: true},
+      {id: 3, en: 'Three', vn: 'Ba', isMemorized: true},
+      {id: 4, en: 'Four', vn: 'Bốn', isMemorized: false},
+      {id: 5, en: 'Five', vn: 'Năm', isMemorized: false},
+    ];
     return (
       <View style={styles.container}>
-        <View style={styles.groupWord}>
-          <View style={styles.groupHorizontal}>
-            <Text style={styles.textEn}>{word.en}</Text>
-            <Text style={styles.textVn}>
-              {word.isMemorized ? '----' : word.vn}
-            </Text>
-          </View>
-          <View style={styles.groupHorizontal}>
-            <TouchableOpacity
-              style={{
-                ...styles.buttonMemorize,
-                backgroundColor: word.isMemorized ? 'green' : 'red',
-              }}>
-              <Text style={styles.textMemorize}>
-                {word.isMemorized ? 'Forgot' : 'Memorize'}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonRemove}>
-              <Text style={styles.textRemove}>Remove</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+        {words.map((word) => {
+          return (
+            <View>
+              <View style={styles.groupWord}>
+                <View style={styles.groupHorizontal}>
+                  <Text style={styles.textEn}>{word.en}</Text>
+                  <Text style={styles.textVn}>
+                    {word.isMemorized ? '----' : word.vn}
+                  </Text>
+                </View>
+                <View style={styles.groupHorizontal}>
+                  <TouchableOpacity
+                    style={{
+                      ...styles.buttonMemorize,
+                      backgroundColor: word.isMemorized ? 'green' : 'red',
+                    }}>
+                    <Text style={styles.textMemorize}>
+                      {word.isMemorized ? 'Forgot' : 'Memorize'}
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.buttonRemove}>
+                    <Text style={styles.textRemove}>Remove</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+          );
+        })}
       </View>
     );
   }
@@ -47,6 +57,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     marginHorizontal: 10,
     borderRadius: 5,
+    marginBottom : 10,
   },
   groupHorizontal: {
     marginBottom: 10,
