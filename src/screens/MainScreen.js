@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
 import {getWidth} from '../helpers/AppDimension';
 
 export default class MainScreen extends Component {
@@ -16,7 +16,7 @@ export default class MainScreen extends Component {
       <View style={styles.container}>
         {words.map((word) => {
           return (
-            <View>
+            <View key={word.id}>
               <View style={styles.groupWord}>
                 <View style={styles.groupHorizontal}>
                   <Text style={styles.textEn}>{word.en}</Text>
