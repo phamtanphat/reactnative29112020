@@ -5,17 +5,27 @@ import {getWidth} from '../helpers/AppDimension';
 
 export default class MainScreen extends Component {
   render() {
-    const word = {en: 'One', vn: 'Một'};
+    const word = {en: 'One', vn: 'Một', isMemorized: false};
+    // true ? nút forgot (màu xanh) : Memorize (Màu đỏ)
+    // true ? ---- : nghĩa tiếng viêt
     return (
       <View style={styles.container}>
         <View style={styles.groupWord}>
           <View style={styles.groupHorizontal}>
             <Text style={styles.textEn}>{word.en}</Text>
-            <Text style={styles.textVn}>{word.vn}</Text>
+            <Text style={styles.textVn}>
+              {word.isMemorized ? '----' : word.vn}
+            </Text>
           </View>
           <View style={styles.groupHorizontal}>
-            <TouchableOpacity style={styles.buttonMemorize}>
-              <Text style={styles.textMemorize}>Forgot</Text>
+            <TouchableOpacity
+              style={{
+                ...styles.buttonMemorize,
+                backgroundColor: word.isMemorized ? 'green' : 'red',
+              }}>
+              <Text style={styles.textMemorize}>
+                {word.isMemorized ? 'Forgot' : 'Memorize'}
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.buttonRemove}>
               <Text style={styles.textRemove}>Remove</Text>
