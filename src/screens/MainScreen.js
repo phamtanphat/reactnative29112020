@@ -1,39 +1,26 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  TouchableHighlight,
-} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 
 export default class MainScreen extends Component {
   render() {
     const word = {en: 'One', vn: 'Một'};
     return (
       <View style={styles.container}>
-        <View style={styles.groupText}>
-          <Text style={styles.textEn}>{word.en}</Text>
-          <Text style={styles.textVn}>{word.vn}</Text>
+        <View style={styles.groupWord}>
+          <View style={styles.groupHorizontal}>
+            <Text style={styles.textEn}>{word.en}</Text>
+            <Text style={styles.textVn}>{word.vn}</Text>
+          </View>
+          <View style={styles.groupHorizontal}>
+            <TouchableOpacity style={styles.buttonMemorize}>
+              <Text style={styles.textMemorize}>Forgot</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonRemove}>
+              <Text style={styles.textRemove}>Remove</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        {/* <TouchableOpacity
-          activeOpacity={0.2}
-          onPress={function () {
-            alert('Click me');
-          }}
-          onLongPress={function(){
-            alert('Long press')
-          }}
-          >
-          <Text>Click me</Text>
-        </TouchableOpacity> */}
-        {/* <TouchableHighlight
-          activeOpacity={0.6}
-          underlayColor="#DDDDDD"
-          onPress={() => alert('Pressed!')}>
-          <Text>Touchable Highlight</Text>
-        </TouchableHighlight> */}
       </View>
     );
   }
@@ -43,7 +30,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  groupText: {
+  groupWord: {
+    height: 100,
+    backgroundColor: 'gainsboro',
+    justifyContent: 'space-evenly',
+    marginHorizontal: 10,
+    borderRadius: 5,
+  },
+  groupHorizontal: {
+    marginBottom: 10,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
   },
@@ -54,5 +49,21 @@ const styles = StyleSheet.create({
   textVn: {
     color: 'red',
     fontWeight: '500',
+  },
+  buttonMemorize: {
+    backgroundColor: 'green',
+    padding: 10,
+    borderRadius: 5,
+  },
+  buttonRemove: {
+    backgroundColor: 'yellow',
+    padding: 10,
+    borderRadius: 5,
+  },
+  textMemorize: {
+    color: 'white',
+  },
+  textRemove: {
+    color: 'darkblue',
   },
 });
