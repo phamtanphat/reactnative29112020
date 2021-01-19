@@ -1,6 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  TouchableHighlight,
+} from 'react-native';
 
 export default class MainScreen extends Component {
   render() {
@@ -11,7 +17,7 @@ export default class MainScreen extends Component {
           <Text style={styles.textEn}>{word.en}</Text>
           <Text style={styles.textVn}>{word.vn}</Text>
         </View>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           activeOpacity={0.2}
           onPress={function () {
             alert('Click me');
@@ -19,10 +25,15 @@ export default class MainScreen extends Component {
           onLongPress={function(){
             alert('Long press')
           }}
-          
           >
           <Text>Click me</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
+        {/* <TouchableHighlight
+          activeOpacity={0.6}
+          underlayColor="#DDDDDD"
+          onPress={() => alert('Pressed!')}>
+          <Text>Touchable Highlight</Text>
+        </TouchableHighlight> */}
       </View>
     );
   }
