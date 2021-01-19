@@ -1,88 +1,35 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, StyleSheet} from 'react-native';
 
 export default class MainScreen extends Component {
   render() {
+    const word = {en: 'One', vn: 'Một'};
     return (
-      <View style={{flex: 1}}>
-        <View style={{flexDirection: 'column', flex: 1}}>
-          <View
-            style={{
-              flex: 1,
-              justifyContent: 'center',
-              alignItems: 'center',
-              backgroundColor: 'orange',
-            }}>
-            <Text style={{color: 'black'}}>A</Text>
-          </View>
-          <View
-            style={{
-              flex: 1,
-              justifyContent: 'center',
-              alignItems: 'center',
-              backgroundColor: 'blue',
-            }}>
-            <Text style={{color: 'black'}}>B</Text>
-          </View>
-          <View
-            style={{
-              flex: 1,
-              justifyContent: 'center',
-              alignItems: 'center',
-              backgroundColor: 'pink',
-            }}>
-            <Text style={{color: 'black'}}>C</Text>
-          </View>
-          <View
-            style={{
-              flex: 1,
-              justifyContent: 'center',
-              alignItems: 'center',
-              backgroundColor: 'gray',
-            }}>
-            <Text style={{color: 'black'}}>D</Text>
-          </View>
-        </View>
-        <View style={{flexDirection: 'row', flex: 1}}>
-          <View
-            style={{
-              flex: 1,
-              justifyContent: 'center',
-              alignItems: 'center',
-              backgroundColor: 'orange',
-            }}>
-            <Text style={{color: 'black'}}>A</Text>
-          </View>
-          <View
-            style={{
-              flex: 1,
-              justifyContent: 'center',
-              alignItems: 'center',
-              backgroundColor: 'blue',
-            }}>
-            <Text style={{color: 'black'}}>B</Text>
-          </View>
-          <View
-            style={{
-              flex: 1,
-              justifyContent: 'center',
-              alignItems: 'center',
-              backgroundColor: 'pink',
-            }}>
-            <Text style={{color: 'black'}}>C</Text>
-          </View>
-          <View
-            style={{
-              flex: 1,
-              justifyContent: 'center',
-              alignItems: 'center',
-              backgroundColor: 'gray',
-            }}>
-            <Text style={{color: 'black'}}>D</Text>
-          </View>
+      <View style={styles.container}>
+        <View style={styles.groupText}>
+          <Text style={styles.textEn}>{word.en}</Text>
+          <Text style={styles.textVn}>{word.vn}</Text>
         </View>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  groupText: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+  },
+  textEn: {
+    color: 'green',
+    fontWeight: '500',
+  },
+  textVn: {
+    color: 'red',
+    fontWeight: '500',
+  },
+});
