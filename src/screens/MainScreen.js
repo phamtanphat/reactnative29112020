@@ -1,6 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {getWidth} from '../helpers/AppDimension';
 
 export default class MainScreen extends Component {
   render() {
@@ -45,10 +46,12 @@ const styles = StyleSheet.create({
   textEn: {
     color: 'green',
     fontWeight: '500',
+    fontSize: getWidth() / 22,
   },
   textVn: {
     color: 'red',
     fontWeight: '500',
+    fontSize: getWidth() / 22,
   },
   buttonMemorize: {
     backgroundColor: 'green',
@@ -62,8 +65,10 @@ const styles = StyleSheet.create({
   },
   textMemorize: {
     color: 'white',
+    fontSize: getWidth() / 22,
   },
   textRemove: {
     color: 'darkblue',
+    fontSize: getWidth() / 22,
   },
 });
