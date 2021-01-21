@@ -14,34 +14,10 @@ export default class MainScreen extends Component {
     ];
     return (
       <View style={styles.container}>
-        {words.map((word) => {
-          return (
-            <View key={word.id}>
-              <View style={styles.groupWord}>
-                <View style={styles.groupHorizontal}>
-                  <Text style={styles.textEn}>{word.en}</Text>
-                  <Text style={styles.textVn}>
-                    {word.isMemorized ? '----' : word.vn}
-                  </Text>
-                </View>
-                <View style={styles.groupHorizontal}>
-                  <TouchableOpacity
-                    style={{
-                      ...styles.buttonMemorize,
-                      backgroundColor: word.isMemorized ? 'green' : 'red',
-                    }}>
-                    <Text style={styles.textMemorize}>
-                      {word.isMemorized ? 'Forgot' : 'Memorize'}
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.buttonRemove}>
-                    <Text style={styles.textRemove}>Remove</Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </View>
-          );
-        })}
+        {/* <FlatList
+          data={words}
+          keyExtractor={}
+        /> */}
       </View>
     );
   }
@@ -57,7 +33,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     marginHorizontal: 10,
     borderRadius: 5,
-    marginBottom : 10,
+    marginBottom: 10,
   },
   groupHorizontal: {
     marginBottom: 10,
