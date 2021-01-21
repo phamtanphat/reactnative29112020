@@ -2,13 +2,19 @@
 import React, {Component} from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
 
-// hook
+// re-render
 export default class Box extends Component {
   constructor(props) {
     super(props);
     this.state = {
       count: 0,
     };
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextState.count >= 5) {
+      return false;
+    }
+    return true;
   }
   render() {
     console.log('render');
@@ -50,8 +56,5 @@ export default class Box extends Component {
         </View>
       </View>
     );
-  }
-  componentDidMount() {
-    console.log('componentDidMount');
   }
 }
