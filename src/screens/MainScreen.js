@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   FlatList,
   RefreshControl,
+  ActivityIndicator,
 } from 'react-native';
 import {getWidth} from '../helpers/AppDimension';
 
@@ -20,8 +21,20 @@ export default class MainScreen extends Component {
         {id: 3, en: 'Three', vn: 'Ba', isMemorized: true},
         {id: 4, en: 'Four', vn: 'Bốn', isMemorized: false},
         {id: 5, en: 'Five', vn: 'Năm', isMemorized: false},
+
+        {id: 4, en: 'Four', vn: 'Bốn', isMemorized: false},
+        {id: 5, en: 'Five', vn: 'Năm', isMemorized: false},
+
+        {id: 4, en: 'Four', vn: 'Bốn', isMemorized: false},
+        {id: 5, en: 'Five', vn: 'Năm', isMemorized: false},
+
+        {id: 4, en: 'Four', vn: 'Bốn', isMemorized: false},
+        {id: 5, en: 'Five', vn: 'Năm', isMemorized: false},
+
+        {id: 4, en: 'Four', vn: 'Bốn', isMemorized: false},
+        {id: 5, en: 'Five', vn: 'Năm', isMemorized: false},
       ],
-      isRefresh: false,
+      isLoading: false,
     };
   }
   render() {
@@ -61,20 +74,21 @@ export default class MainScreen extends Component {
           ItemSeparatorComponent={() => {
             return <View style={styles.itemSeparator} />;
           }}
-          refreshControl={
-            <RefreshControl
-              refreshing={this.state.isRefresh}
-              onRefresh={() => {
-                this.setState({isRefresh: true}, () => {
-                  setTimeout(() => {
-                    this.setState({isRefresh: false});
-                  }, 4000);
-                });
-              }}
-              tintColor="red"
-              colors={['red', 'blue', 'green']}
-            />
-          }
+          onEndReachedThreshold={0.5}
+          onEndReached={() => {
+            this.setState({isLoading: true}, () => {
+              alert('Load more');
+              setTimeout(() => {
+                this.setState({isLoading: false});
+              }, 3000);
+            });
+          }}
+          onMomentumScrollBegin={false}
+          ListFooterComponent={() => {
+            return this.state.isLoading ? (
+              <ActivityIndicator color="red" size={30} />
+            ) : null;
+          }}
         />
       </View>
     );
