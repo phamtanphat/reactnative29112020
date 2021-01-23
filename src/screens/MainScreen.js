@@ -33,7 +33,7 @@ export default class MainScreen extends Component {
       return true;
     });
     this.setState({words: newWords});
-  }
+  };
   render() {
     return (
       <View style={styles.container}>
