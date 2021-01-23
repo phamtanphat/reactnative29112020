@@ -72,6 +72,7 @@ export default class MainScreen extends Component {
                 });
               }}
               tintColor="red"
+              colors={['red', 'blue', 'green']}
             />
           }
         />
