@@ -1,6 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  FlatList,
+  RefreshControl,
+} from 'react-native';
 import {getWidth} from '../helpers/AppDimension';
 
 export default class MainScreen extends Component {
@@ -54,14 +61,19 @@ export default class MainScreen extends Component {
           ItemSeparatorComponent={() => {
             return <View style={styles.itemSeparator} />;
           }}
-          refreshing={this.state.isRefresh}
-          onRefresh={() => {
-            this.setState({isRefresh: true}, () => {
-              setTimeout(() => {
-                this.setState({isRefresh: false});
-              }, 4000);
-            });
-          }}
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.isRefresh}
+              onRefresh={() => {
+                this.setState({isRefresh: true}, () => {
+                  setTimeout(() => {
+                    this.setState({isRefresh: false});
+                  }, 4000);
+                });
+              }}
+              tintColor="red"
+            />
+          }
         />
       </View>
     );
