@@ -14,6 +14,7 @@ export default class MainScreen extends Component {
         {id: 4, en: 'Four', vn: 'Bốn', isMemorized: false},
         {id: 5, en: 'Five', vn: 'Năm', isMemorized: false},
       ],
+      isRefresh: false,
     };
   }
   render() {
@@ -50,6 +51,17 @@ export default class MainScreen extends Component {
               </View>
             );
           }}
+          ItemSeparatorComponent={() => {
+            return <View style={styles.itemSeparator} />;
+          }}
+          refreshing={this.state.isRefresh}
+          onRefresh={() => {
+            this.setState({isRefresh: true}, () => {
+              setTimeout(() => {
+                this.setState({isRefresh: false});
+              }, 4000);
+            });
+          }}
         />
       </View>
     );
@@ -66,7 +78,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     marginHorizontal: 10,
     borderRadius: 5,
-    marginBottom: 10,
   },
   groupHorizontal: {
     marginBottom: 10,
@@ -100,5 +111,8 @@ const styles = StyleSheet.create({
   textRemove: {
     color: 'darkblue',
     fontSize: getWidth() / 22,
+  },
+  itemSeparator: {
+    height: 5,
   },
 });
