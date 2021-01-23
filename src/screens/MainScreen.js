@@ -1,14 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  FlatList,
-  RefreshControl,
-  ActivityIndicator,
-} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
 import {getWidth} from '../helpers/AppDimension';
 
 export default class MainScreen extends Component {
@@ -21,22 +13,18 @@ export default class MainScreen extends Component {
         {id: 3, en: 'Three', vn: 'Ba', isMemorized: true},
         {id: 4, en: 'Four', vn: 'Bốn', isMemorized: false},
         {id: 5, en: 'Five', vn: 'Năm', isMemorized: false},
-
-        {id: 4, en: 'Four', vn: 'Bốn', isMemorized: false},
-        {id: 5, en: 'Five', vn: 'Năm', isMemorized: false},
-
-        {id: 4, en: 'Four', vn: 'Bốn', isMemorized: false},
-        {id: 5, en: 'Five', vn: 'Năm', isMemorized: false},
-
-        {id: 4, en: 'Four', vn: 'Bốn', isMemorized: false},
-        {id: 5, en: 'Five', vn: 'Năm', isMemorized: false},
-
-        {id: 4, en: 'Four', vn: 'Bốn', isMemorized: false},
-        {id: 5, en: 'Five', vn: 'Năm', isMemorized: false},
       ],
-      isLoading: false,
     };
   }
+  toggleWord = (item) => {
+    const newWords = this.state.words.map((word) => {
+      if (word.id === item.id) {
+        return {...word, isMemorized: !item.isMemorized};
+      }
+      return word;
+    });
+    this.setState({words: newWords});
+  };
   render() {
     return (
       <View style={styles.container}>
@@ -55,6 +43,7 @@ export default class MainScreen extends Component {
                   </View>
                   <View style={styles.groupHorizontal}>
                     <TouchableOpacity
+                      onPress={() => this.toggleWord(item)}
                       style={{
                         ...styles.buttonMemorize,
                         backgroundColor: item.isMemorized ? 'green' : 'red',
@@ -73,21 +62,6 @@ export default class MainScreen extends Component {
           }}
           ItemSeparatorComponent={() => {
             return <View style={styles.itemSeparator} />;
-          }}
-          onEndReachedThreshold={0.5}
-          onEndReached={() => {
-            this.setState({isLoading: true}, () => {
-              alert('Load more');
-              setTimeout(() => {
-                this.setState({isLoading: false});
-              }, 3000);
-            });
-          }}
-          onMomentumScrollBegin={false}
-          ListFooterComponent={() => {
-            return this.state.isLoading ? (
-              <ActivityIndicator color="red" size={30} />
-            ) : null;
           }}
         />
       </View>
