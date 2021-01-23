@@ -15,6 +15,8 @@ export default class Form extends Component {
       shouldShowForm: true,
     };
   }
+  // formik and yup : xử lý validate form
+  // picker  component
 
   renderForm = (shouldShowForm) => {
     if (shouldShowForm) {
