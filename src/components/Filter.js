@@ -14,7 +14,6 @@ export default class Filter extends Component {
       <View style={styles.containerPickerStyle}>
         <RNPickerSelect
           value={this.state.filterMode}
-         
           items={[
             {label: 'Show All', value: 'Show_All'},
             {label: 'Show Forgot', value: 'Show_Forgot'},
@@ -26,9 +25,6 @@ export default class Filter extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {filterMode: state.filterMode};
-};
 
 const styles = StyleSheet.create({
   containerPickerStyle: {
