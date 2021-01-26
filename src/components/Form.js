@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 import React, {Component} from 'react';
 import {
   Text,
@@ -13,6 +14,8 @@ export default class Form extends Component {
     super(props);
     this.state = {
       shouldShowForm: true,
+      txtEn: '',
+      txtVn: '',
     };
   }
   // formik and yup : xử lý validate form
@@ -23,14 +26,25 @@ export default class Form extends Component {
       return (
         <View>
           <View style={styles.containerTextInput}>
-            <TextInput placeholder="English" style={styles.textInput} />
-            <TextInput placeholder="Vietnamese" style={styles.textInput} />
+            <TextInput
+              onChangeText={(text) => (this.state.txtEn = text)}
+              placeholder="English"
+              style={styles.textInput}
+              ref={(refs) => (this.textInputEn = refs)}
+            />
+            <TextInput
+              onChangeText={(text) => (this.state.txtVn = text)}
+              placeholder="Vietnamese"
+              style={styles.textInput}
+            />
           </View>
           <View style={styles.containerTouchable}>
             <TouchableOpacity style={styles.touchableAddword}>
               <Text style={styles.textTouchable}>Add word</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.touchableCancel}>
+            <TouchableOpacity 
+              onPress={() => this.textInputEn.clear()}
+              style={styles.touchableCancel}>
               <Text style={styles.textTouchable}>Cancel</Text>
             </TouchableOpacity>
           </View>
