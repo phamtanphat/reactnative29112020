@@ -10,6 +10,7 @@ import {
   TextInput,
 } from 'react-native';
 import {getWidth, getHeight} from '../helpers/AppDimension';
+import RNPickerSelect from 'react-native-picker-select';
 
 export default class MainScreen extends Component {
   constructor(props) {
@@ -25,6 +26,7 @@ export default class MainScreen extends Component {
       shouldShowForm: false,
       txtEn: '',
       txtVn: '',
+      filterMode: 'Show_All',
     };
   }
   toggleWord = (item) => {
@@ -66,7 +68,7 @@ export default class MainScreen extends Component {
       this.textInputEn.clear();
       this.textInputVn.clear();
     });
-  }
+  };
   renderListWord = () => {
     return (
       <FlatList
@@ -151,10 +153,26 @@ export default class MainScreen extends Component {
       );
     }
   };
+  renderFilter = () => {
+    return (
+      <View style={styles.containerPickerStyle}>
+        <RNPickerSelect
+          value={this.state.filterMode}
+          onValueChange={(value) => this.setState({filterMode: value})}
+          items={[
+            {label: 'Show All', value: 'Show_All'},
+            {label: 'Show Forgot', value: 'Show_Forgot'},
+            {label: 'Show Memorized', value: 'Show_Memorized'},
+          ]}
+        />
+      </View>
+    );
+  };
   render() {
     return (
       <View style={styles.container}>
         {this.renderForm()}
+        {this.renderFilter()}
         {this.renderListWord()}
       </View>
     );
@@ -252,5 +270,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     marginBottom: 10,
+  },
+  containerPickerStyle: {
+    borderWidth: 1,
+    borderRadius: 1,
+    borderColor: 'black',
+    padding: 20,
+    marginHorizontal: 10,
+    marginBottom: 10,
+  },
+  pickerStyle: {
+    padding: 50,
   },
 });
