@@ -6,7 +6,6 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
-  Keyboard,
 } from 'react-native';
 
 export default class Form extends Component {
@@ -21,6 +20,9 @@ export default class Form extends Component {
   // formik and yup : xử lý validate form
   // picker  component
 
+  toggleForm = () => {
+    this.setState({shouldShowForm: !this.state.shouldShowForm});
+  };
   renderForm = (shouldShowForm) => {
     if (shouldShowForm) {
       return (
@@ -36,14 +38,15 @@ export default class Form extends Component {
               onChangeText={(text) => (this.state.txtVn = text)}
               placeholder="Vietnamese"
               style={styles.textInput}
+              ref={(refs) => (this.textInputVn = refs)}
             />
           </View>
           <View style={styles.containerTouchable}>
             <TouchableOpacity style={styles.touchableAddword}>
               <Text style={styles.textTouchable}>Add word</Text>
             </TouchableOpacity>
-            <TouchableOpacity 
-              onPress={() => this.textInputEn.clear()}
+            <TouchableOpacity
+              onPress={() => this.toggleForm()}
               style={styles.touchableCancel}>
               <Text style={styles.textTouchable}>Cancel</Text>
             </TouchableOpacity>
@@ -52,7 +55,9 @@ export default class Form extends Component {
       );
     } else {
       return (
-        <TouchableOpacity style={styles.buttonOpenForm}>
+        <TouchableOpacity 
+          onPress={() => this.toggleForm()}
+          style={styles.buttonOpenForm}>
           <Text style={styles.textOpenForm}>+</Text>
         </TouchableOpacity>
       );
