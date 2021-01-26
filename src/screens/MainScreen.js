@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
 import {
@@ -8,7 +9,7 @@ import {
   FlatList,
   TextInput,
 } from 'react-native';
-import {getWidth} from '../helpers/AppDimension';
+import {getWidth, getHeight} from '../helpers/AppDimension';
 
 export default class MainScreen extends Component {
   constructor(props) {
@@ -20,7 +21,7 @@ export default class MainScreen extends Component {
         {id: 3, en: 'Three', vn: 'Ba', isMemorized: true},
         {id: 4, en: 'Four', vn: 'Bốn', isMemorized: false},
         {id: 5, en: 'Five', vn: 'Năm', isMemorized: false},
-      ],
+      ].reverse(),
       shouldShowForm: false,
       txtEn: '',
       txtVn: '',
@@ -47,6 +48,25 @@ export default class MainScreen extends Component {
   toggleForm = () => {
     this.setState({shouldShowForm: !this.state.shouldShowForm});
   };
+  addWord = () => {
+    const {txtEn, txtVn} = this.state;
+    if (txtEn.length <= 0 || txtVn.length <= 0) {
+      alert('Bạn chưa nhập đủ thông tin');
+      return;
+    }
+    const newWord = {
+      id: this.state.words.length + 1,
+      en: txtEn,
+      vn: txtVn,
+      isMemorized: false,
+    };
+    const newWords = Object.assign([], this.state.words);
+    newWords.unshift(newWord);
+    this.setState({words: newWords}, () => {
+      this.textInputEn.clear();
+      this.textInputVn.clear();
+    });
+  }
   renderListWord = () => {
     return (
       <FlatList
@@ -108,11 +128,13 @@ export default class MainScreen extends Component {
             />
           </View>
           <View style={styles.containerTouchable}>
-            <TouchableOpacity style={styles.touchableAddword}>
+            <TouchableOpacity
+              onPress={this.addWord}
+              style={styles.touchableAddword}>
               <Text style={styles.textTouchable}>Add word</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => this.toggleForm()}
+              onPress={this.toggleForm}
               style={styles.touchableCancel}>
               <Text style={styles.textTouchable}>Cancel</Text>
             </TouchableOpacity>
@@ -122,7 +144,7 @@ export default class MainScreen extends Component {
     } else {
       return (
         <TouchableOpacity
-          onPress={() => this.toggleForm()}
+          onPress={this.toggleForm}
           style={styles.buttonOpenForm}>
           <Text style={styles.textOpenForm}>+</Text>
         </TouchableOpacity>
