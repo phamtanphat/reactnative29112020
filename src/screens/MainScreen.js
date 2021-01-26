@@ -159,6 +159,9 @@ export default class MainScreen extends Component {
         <RNPickerSelect
           value={this.state.filterMode}
           onValueChange={(value) => this.setState({filterMode: value})}
+          // 1 : Show all => Hien thi tat ca
+          // 2 : Show forgot => Khi picker chon show forgot và từ vựng đã thuộc thì mới hiển thị
+          // 3 : Show memorized =>  Khi picker chon show memorized và từ vựng chưa thuộc thì mới hiển thị
           items={[
             {label: 'Show All', value: 'Show_All'},
             {label: 'Show Forgot', value: 'Show_Forgot'},
