@@ -9,9 +9,9 @@ import Filter from './src/components/Filter';
 export default class App extends Component {
   render() {
     return (
-      <SafeAreaView style={{flex : 1}}>
-        <MainScreen />
-        {/* <Box /> */}
+      <SafeAreaView style={{flex: 1}}>
+        {/* <MainScreen /> */}
+        <Box />
         {/* <Form /> */}
         {/* <Filter /> */}
       </SafeAreaView>

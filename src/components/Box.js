@@ -1,8 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {Text, View, TouchableOpacity} from 'react-native';
+import {Text, View} from 'react-native';
+import Child from './Child';
 
-// re-render
 export default class Box extends Component {
   constructor(props) {
     super(props);
@@ -10,14 +10,7 @@ export default class Box extends Component {
       count: 0,
     };
   }
-  shouldComponentUpdate(nextProps, nextState) {
-    if (nextState.count >= 5) {
-      return false;
-    }
-    return true;
-  }
   render() {
-    console.log('render');
     return (
       <View style={{flex: 1, justifyContent: 'center'}}>
         <Text
@@ -29,31 +22,7 @@ export default class Box extends Component {
           }}>
           Count : {this.state.count}
         </Text>
-        <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
-          <TouchableOpacity
-            onPress={() => {
-              this.setState({count: this.state.count + 1}, () => {
-                console.log(this.state.count);
-              });
-            }}
-            style={{backgroundColor: 'green', padding: 10, borderRadius: 5}}>
-            <Text>Increase</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              this.setState({count: this.state.count - 1});
-            }}
-            style={{backgroundColor: 'red', padding: 10, borderRadius: 5}}>
-            <Text>Decrease</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              this.setState({count: 0});
-            }}
-            style={{backgroundColor: 'yellow', padding: 10, borderRadius: 5}}>
-            <Text>Reset</Text>
-          </TouchableOpacity>
-        </View>
+        <Child />
       </View>
     );
   }
