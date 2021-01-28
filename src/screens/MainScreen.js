@@ -69,42 +69,49 @@ export default class MainScreen extends Component {
       this.textInputVn.clear();
     });
   };
+  renderItemWord = (item) => {
+    const {filterMode} = this.state;
+    if (filterMode === 'Show_Forgot' && !item.isMemorized) {
+      return null;
+    } else if (filterMode === 'Show_Memorized' && item.isMemorized) {
+      return null;
+    }
+    return (
+      <View>
+        <View style={styles.groupWord}>
+          <View style={styles.groupHorizontal}>
+            <Text style={styles.textEn}>{item.en}</Text>
+            <Text style={styles.textVn}>
+              {item.isMemorized ? '----' : item.vn}
+            </Text>
+          </View>
+          <View style={styles.groupHorizontal}>
+            <TouchableOpacity
+              onPress={() => this.toggleWord(item)}
+              style={{
+                ...styles.buttonMemorize,
+                backgroundColor: item.isMemorized ? 'green' : 'red',
+              }}>
+              <Text style={styles.textMemorize}>
+                {item.isMemorized ? 'Forgot' : 'Memorize'}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.removeWord(item)}
+              style={styles.buttonRemove}>
+              <Text style={styles.textRemove}>Remove</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    );
+  };
   renderListWord = () => {
     return (
       <FlatList
         data={this.state.words}
         keyExtractor={(item, index) => item.id.toString()}
-        renderItem={({item, index}) => {
-          return (
-            <View>
-              <View style={styles.groupWord}>
-                <View style={styles.groupHorizontal}>
-                  <Text style={styles.textEn}>{item.en}</Text>
-                  <Text style={styles.textVn}>
-                    {item.isMemorized ? '----' : item.vn}
-                  </Text>
-                </View>
-                <View style={styles.groupHorizontal}>
-                  <TouchableOpacity
-                    onPress={() => this.toggleWord(item)}
-                    style={{
-                      ...styles.buttonMemorize,
-                      backgroundColor: item.isMemorized ? 'green' : 'red',
-                    }}>
-                    <Text style={styles.textMemorize}>
-                      {item.isMemorized ? 'Forgot' : 'Memorize'}
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={() => this.removeWord(item)}
-                    style={styles.buttonRemove}>
-                    <Text style={styles.textRemove}>Remove</Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </View>
-          );
-        }}
+        renderItem={({item, index}) => this.renderItemWord(item)}
         ItemSeparatorComponent={() => {
           return <View style={styles.itemSeparator} />;
         }}
@@ -159,9 +166,6 @@ export default class MainScreen extends Component {
         <RNPickerSelect
           value={this.state.filterMode}
           onValueChange={(value) => this.setState({filterMode: value})}
-          // 1 : Show all => Hien thi tat ca
-          // 2 : Show forgot => Khi picker chon show forgot và từ vựng đã thuộc thì mới hiển thị
-          // 3 : Show memorized =>  Khi picker chon show memorized và từ vựng chưa thuộc thì mới hiển thị
           items={[
             {label: 'Show All', value: 'Show_All'},
             {label: 'Show Forgot', value: 'Show_Forgot'},
