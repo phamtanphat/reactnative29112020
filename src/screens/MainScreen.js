@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import {getWidth, getHeight} from '../helpers/AppDimension';
 import RNPickerSelect from 'react-native-picker-select';
+import Word from '../components/Word';
 
 export default class MainScreen extends Component {
   constructor(props) {
@@ -69,55 +70,7 @@ export default class MainScreen extends Component {
       this.textInputVn.clear();
     });
   };
-  renderItemWord = (item) => {
-    const {filterMode} = this.state;
-    if (filterMode === 'Show_Forgot' && !item.isMemorized) {
-      return null;
-    } else if (filterMode === 'Show_Memorized' && item.isMemorized) {
-      return null;
-    }
-    return (
-      <View>
-        <View style={styles.groupWord}>
-          <View style={styles.groupHorizontal}>
-            <Text style={styles.textEn}>{item.en}</Text>
-            <Text style={styles.textVn}>
-              {item.isMemorized ? '----' : item.vn}
-            </Text>
-          </View>
-          <View style={styles.groupHorizontal}>
-            <TouchableOpacity
-              onPress={() => this.toggleWord(item)}
-              style={{
-                ...styles.buttonMemorize,
-                backgroundColor: item.isMemorized ? 'green' : 'red',
-              }}>
-              <Text style={styles.textMemorize}>
-                {item.isMemorized ? 'Forgot' : 'Memorize'}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => this.removeWord(item)}
-              style={styles.buttonRemove}>
-              <Text style={styles.textRemove}>Remove</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
-    );
-  };
-  renderListWord = () => {
-    return (
-      <FlatList
-        data={this.state.words}
-        keyExtractor={(item, index) => item.id.toString()}
-        renderItem={({item, index}) => this.renderItemWord(item)}
-        ItemSeparatorComponent={() => {
-          return <View style={styles.itemSeparator} />;
-        }}
-      />
-    );
-  };
+
   renderForm = () => {
     if (this.state.shouldShowForm) {
       return (
@@ -180,7 +133,7 @@ export default class MainScreen extends Component {
       <View style={styles.container}>
         {this.renderForm()}
         {this.renderFilter()}
-        {this.renderListWord()}
+        <Word words={this.state.words} filterMode={this.state.filterMode}/>
       </View>
     );
   }
