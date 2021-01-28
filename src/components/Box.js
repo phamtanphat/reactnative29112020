@@ -8,13 +8,23 @@ export default class Box extends Component {
     super(props);
     this.state = {
       count: 0,
+      text: '',
     };
-    this.onIncrease = this.onIncrease.bind(this);
   }
-  onIncrease(){
+  onIncrease = () => {
     this.setState({count: this.state.count + 1});
-  }
+  };
+  onDecrease = () => {
+    this.setState({count: this.state.count - 1});
+  };
+  onReset = () => {
+    this.setState({count: 0});
+  };
+  onRandomText = () => {
+    this.setState({text: Math.random()});
+  };
   render() {
+    console.log('Box render');
     return (
       <View style={{flex: 1, justifyContent: 'center'}}>
         <Text
@@ -24,9 +34,16 @@ export default class Box extends Component {
             color: 'black',
             marginBottom: 10,
           }}>
-          Count : {this.state.count}
+          Count : {this.state.count} {'\n'}
+          Text : {this.state.text}
         </Text>
-        <Child onIncrease={this.onIncrease} />
+        <Child
+          onIncrease={this.onIncrease}
+          onDecrease={this.onDecrease}
+          onReset={this.onReset}
+          onRandomText={this.onRandomText}
+          text={this.state.text}
+        />
       </View>
     );
   }
