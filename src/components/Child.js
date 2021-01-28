@@ -8,6 +8,7 @@ export default class Child extends Component {
       <View>
         <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
           <TouchableOpacity
+            onPress={() => this.props.onIncrease()}
             style={{backgroundColor: 'green', padding: 10, borderRadius: 5}}>
             <Text>Increase</Text>
           </TouchableOpacity>
