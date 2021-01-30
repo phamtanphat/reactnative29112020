@@ -36,7 +36,7 @@ export default class MainScreen extends Component {
     });
     this.setState({words: newWords});
   };
-  removeWord = (item) => {
+  onRemoveWord = (item) => {
     const newWords = this.state.words.filter((word) => {
       if (word.id === item.id) {
         return false;
@@ -74,6 +74,7 @@ export default class MainScreen extends Component {
         <Form />
         <Filter filterMode={this.state.filterMode} />
         <Word
+          onRemoveWord={this.onRemoveWord}
           onToggleWord={this.onToggleWord}
           words={this.state.words}
           filterMode={this.state.filterMode}

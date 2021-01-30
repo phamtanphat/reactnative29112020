@@ -1,9 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {View, FlatList, StyleSheet} from 'react-native';
 import ItemWord from './ItemWord';
 
-export default class Word extends Component {
+export default class Word extends PureComponent {
   render() {
     return (
       <FlatList
@@ -12,6 +12,7 @@ export default class Word extends Component {
         renderItem={({item, index}) => (
           <ItemWord
             item={item}
+            onRemoveWord={this.props.onRemoveWord}
             filterMode={this.props.filterMode}
             onToggleWord={this.props.onToggleWord}
           />
