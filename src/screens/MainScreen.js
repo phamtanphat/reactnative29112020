@@ -6,12 +6,12 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
-  FlatList,
   TextInput,
 } from 'react-native';
-import {getWidth, getHeight} from '../helpers/AppDimension';
 import RNPickerSelect from 'react-native-picker-select';
 import Word from '../components/Word';
+import Form from '../components/Form';
+import Filter from '../components/Filter';
 
 export default class MainScreen extends Component {
   constructor(props) {
@@ -22,11 +22,8 @@ export default class MainScreen extends Component {
         {id: 2, en: 'Two', vn: 'Hai', isMemorized: true},
         {id: 3, en: 'Three', vn: 'Ba', isMemorized: true},
         {id: 4, en: 'Four', vn: 'Bốn', isMemorized: false},
-        {id: 5, en: 'Five', vn: 'Năm', isMemorized: false},
+        {id: 5, en: 'Five', vn: 'Năm', isMemorized: true},
       ].reverse(),
-      shouldShowForm: false,
-      txtEn: '',
-      txtVn: '',
       filterMode: 'Show_All',
     };
   }
@@ -131,9 +128,9 @@ export default class MainScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {this.renderForm()}
-        {this.renderFilter()}
-        <Word words={this.state.words} filterMode={this.state.filterMode}/>
+        <Form />
+        <Filter filterMode={this.state.filterMode} />
+        <Word words={this.state.words} filterMode={this.state.filterMode} />
       </View>
     );
   }
@@ -142,104 +139,5 @@ export default class MainScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  groupWord: {
-    height: 100,
-    backgroundColor: 'gainsboro',
-    justifyContent: 'space-evenly',
-    marginHorizontal: 10,
-    borderRadius: 5,
-  },
-  groupHorizontal: {
-    marginBottom: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-  },
-  textEn: {
-    color: 'green',
-    fontWeight: '500',
-    fontSize: getWidth() / 22,
-  },
-  textVn: {
-    color: 'red',
-    fontWeight: '500',
-    fontSize: getWidth() / 22,
-  },
-  buttonMemorize: {
-    backgroundColor: 'green',
-    padding: 10,
-    borderRadius: 5,
-  },
-  buttonRemove: {
-    backgroundColor: 'yellow',
-    padding: 10,
-    borderRadius: 5,
-  },
-  textMemorize: {
-    color: 'white',
-    fontSize: getWidth() / 22,
-  },
-  textRemove: {
-    color: 'darkblue',
-    fontSize: getWidth() / 22,
-  },
-  itemSeparator: {
-    height: 5,
-  },
-  containerTextInput: {
-    width: '100%',
-    height: 150,
-    justifyContent: 'space-evenly',
-  },
-  textInput: {
-    borderWidth: 1,
-    height: 60,
-    fontSize: 20,
-    marginHorizontal: 10,
-    paddingHorizontal: 10,
-  },
-  touchableAddword: {
-    backgroundColor: '#218838',
-    padding: 15,
-    borderRadius: 10,
-  },
-  textTouchable: {
-    color: 'white',
-    fontSize: 20,
-    fontWeight: '500',
-  },
-  touchableCancel: {
-    backgroundColor: 'red',
-    padding: 15,
-    borderRadius: 10,
-  },
-  buttonOpenForm: {
-    marginHorizontal: 10,
-    height: 50,
-    backgroundColor: '#45B157',
-    borderRadius: 5,
-    marginBottom: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  textOpenForm: {
-    color: 'white',
-    fontSize: 30,
-  },
-  containerTouchable: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    marginBottom: 10,
-  },
-  containerPickerStyle: {
-    borderWidth: 1,
-    borderRadius: 1,
-    borderColor: 'black',
-    padding: 20,
-    marginHorizontal: 10,
-    marginBottom: 10,
-  },
-  pickerStyle: {
-    padding: 50,
   },
 });

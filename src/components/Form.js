@@ -12,7 +12,7 @@ export default class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      shouldShowForm: true,
+      shouldShowForm: false,
       txtEn: '',
       txtVn: '',
     };
