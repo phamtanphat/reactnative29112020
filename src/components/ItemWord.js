@@ -4,6 +4,12 @@ import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
 import {getWidth} from '../helpers/AppDimension';
 
 export default class ItemWord extends Component {
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps.item.isMemorized !== this.props.item.isMemorized) {
+      return true;
+    }
+    return false;
+  }
   renderItemWord = (item) => {
     const {filterMode} = this.props;
     if (filterMode === 'Show_Forgot' && !item.isMemorized) {
@@ -22,7 +28,7 @@ export default class ItemWord extends Component {
           </View>
           <View style={styles.groupHorizontal}>
             <TouchableOpacity
-              onPress={() => this.toggleWord(item)}
+              onPress={() => this.props.onToggleWord(item)}
               style={{
                 ...styles.buttonMemorize,
                 backgroundColor: item.isMemorized ? 'green' : 'red',
@@ -42,6 +48,7 @@ export default class ItemWord extends Component {
     );
   };
   render() {
+    console.log('Item Word Render');
     return this.renderItemWord(this.props.item);
   }
 }

@@ -27,7 +27,7 @@ export default class MainScreen extends Component {
       filterMode: 'Show_All',
     };
   }
-  toggleWord = (item) => {
+  onToggleWord = (item) => {
     const newWords = this.state.words.map((word) => {
       if (word.id === item.id) {
         return {...word, isMemorized: !item.isMemorized};
@@ -68,69 +68,16 @@ export default class MainScreen extends Component {
     });
   };
 
-  renderForm = () => {
-    if (this.state.shouldShowForm) {
-      return (
-        <View>
-          <View style={styles.containerTextInput}>
-            <TextInput
-              onChangeText={(text) => (this.state.txtEn = text)}
-              placeholder="English"
-              style={styles.textInput}
-              ref={(refs) => (this.textInputEn = refs)}
-            />
-            <TextInput
-              onChangeText={(text) => (this.state.txtVn = text)}
-              placeholder="Vietnamese"
-              style={styles.textInput}
-              ref={(refs) => (this.textInputVn = refs)}
-            />
-          </View>
-          <View style={styles.containerTouchable}>
-            <TouchableOpacity
-              onPress={this.addWord}
-              style={styles.touchableAddword}>
-              <Text style={styles.textTouchable}>Add word</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={this.toggleForm}
-              style={styles.touchableCancel}>
-              <Text style={styles.textTouchable}>Cancel</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      );
-    } else {
-      return (
-        <TouchableOpacity
-          onPress={this.toggleForm}
-          style={styles.buttonOpenForm}>
-          <Text style={styles.textOpenForm}>+</Text>
-        </TouchableOpacity>
-      );
-    }
-  };
-  renderFilter = () => {
-    return (
-      <View style={styles.containerPickerStyle}>
-        <RNPickerSelect
-          value={this.state.filterMode}
-          onValueChange={(value) => this.setState({filterMode: value})}
-          items={[
-            {label: 'Show All', value: 'Show_All'},
-            {label: 'Show Forgot', value: 'Show_Forgot'},
-            {label: 'Show Memorized', value: 'Show_Memorized'},
-          ]}
-        />
-      </View>
-    );
-  };
   render() {
     return (
       <View style={styles.container}>
         <Form />
         <Filter filterMode={this.state.filterMode} />
-        <Word words={this.state.words} filterMode={this.state.filterMode} />
+        <Word
+          onToggleWord={this.onToggleWord}
+          words={this.state.words}
+          filterMode={this.state.filterMode}
+        />
       </View>
     );
   }

@@ -10,7 +10,11 @@ export default class Word extends Component {
         data={this.props.words}
         keyExtractor={(item, index) => item.id.toString()}
         renderItem={({item, index}) => (
-          <ItemWord item={item} filterMode={this.props.filterMode} />
+          <ItemWord
+            item={item}
+            filterMode={this.props.filterMode}
+            onToggleWord={this.props.onToggleWord}
+          />
         )}
         ItemSeparatorComponent={() => {
           return <View style={styles.itemSeparator} />;
