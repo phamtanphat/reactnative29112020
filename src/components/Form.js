@@ -17,8 +17,24 @@ export default class Form extends Component {
       txtVn: '',
     };
   }
-  // formik and yup : xử lý validate form
-  // picker  component
+ 
+  addWord = () =>{
+    const {txtEn, txtVn} = this.state;
+    if (txtEn.length <= 0 || txtVn.length <= 0) {
+      alert('Bạn chưa nhập đủ thông tin');
+      return;
+    }
+    const newWord = {
+      id: Math.random(),
+      en: txtEn,
+      vn: txtVn,
+      isMemorized: false,
+    };
+    this.props.onAddWord(newWord, () => {
+      this.textInputEn.clear();
+      this.textInputVn.clear();
+    });
+  };
 
   toggleForm = () => {
     this.setState({shouldShowForm: !this.state.shouldShowForm});
@@ -42,7 +58,9 @@ export default class Form extends Component {
             />
           </View>
           <View style={styles.containerTouchable}>
-            <TouchableOpacity style={styles.touchableAddword}>
+            <TouchableOpacity 
+              onPress={this.addWord}
+              style={styles.touchableAddword}>
               <Text style={styles.textTouchable}>Add word</Text>
             </TouchableOpacity>
             <TouchableOpacity

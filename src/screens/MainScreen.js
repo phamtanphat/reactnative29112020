@@ -45,34 +45,25 @@ export default class MainScreen extends Component {
     });
     this.setState({words: newWords});
   };
-  toggleForm = () => {
-    this.setState({shouldShowForm: !this.state.shouldShowForm});
-  };
-  addWord = () => {
-    const {txtEn, txtVn} = this.state;
-    if (txtEn.length <= 0 || txtVn.length <= 0) {
-      alert('Bạn chưa nhập đủ thông tin');
-      return;
-    }
-    const newWord = {
-      id: this.state.words.length + 1,
-      en: txtEn,
-      vn: txtVn,
-      isMemorized: false,
-    };
+  onAddWord = (newWord, callback) => {
     const newWords = Object.assign([], this.state.words);
     newWords.unshift(newWord);
     this.setState({words: newWords}, () => {
-      this.textInputEn.clear();
-      this.textInputVn.clear();
+      callback();
     });
   };
 
+  onSetFilterMode = (filterMode) => {
+    this.setState({filterMode});
+  };
   render() {
     return (
       <View style={styles.container}>
-        <Form />
-        <Filter filterMode={this.state.filterMode} />
+        <Form onAddWord={this.onAddWord} />
+        <Filter
+          onSetFilterMode={this.onSetFilterMode}
+          filterMode={this.state.filterMode}
+        />
         <Word
           onRemoveWord={this.onRemoveWord}
           onToggleWord={this.onToggleWord}

@@ -8,6 +8,9 @@ export default class ItemWord extends Component {
     if (nextProps.item.isMemorized !== this.props.item.isMemorized) {
       return true;
     }
+    if (nextProps.filterMode !== this.props.filterMode){
+      return true;
+    }
     return false;
   }
   renderItemWord = (item) => {
