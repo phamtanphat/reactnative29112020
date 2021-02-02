@@ -51,7 +51,6 @@ export default class ItemWord extends Component {
     );
   };
   render() {
-    console.log('Item Word Render');
     return this.renderItemWord(this.props.item);
   }
 }
