@@ -42,7 +42,7 @@ class ItemWord extends Component {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => this.props.onRemoveWord(item)}
+              onPress={() => this.props.dispatch({type: 'REMOVE_WORD', item})}
               style={styles.buttonRemove}>
               <Text style={styles.textRemove}>Remove</Text>
             </TouchableOpacity>

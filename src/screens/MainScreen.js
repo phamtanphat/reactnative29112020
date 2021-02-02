@@ -8,39 +8,12 @@ import Filter from '../components/Filter';
 import {connect} from 'react-redux';
 
 class MainScreen extends Component {
-  onRemoveWord = (item) => {
-    const newWords = this.state.words.filter((word) => {
-      if (word.id === item.id) {
-        return false;
-      }
-      return true;
-    });
-    this.setState({words: newWords});
-  };
-  onAddWord = (newWord, callback) => {
-    const newWords = Object.assign([], this.state.words);
-    newWords.unshift(newWord);
-    this.setState({words: newWords}, () => {
-      callback();
-    });
-  };
-
-  onSetFilterMode = (filterMode) => {
-    this.setState({filterMode});
-  };
   render() {
     return (
       <View style={styles.container}>
-        <Form onAddWord={this.onAddWord} />
-        <Filter
-          onSetFilterMode={this.onSetFilterMode}
-          filterMode={this.props.filterMode}
-        />
-        <Word
-          onRemoveWord={this.onRemoveWord}
-          words={this.props.words}
-          filterMode={this.props.filterMode}
-        />
+        <Form />
+        <Filter filterMode={this.props.filterMode} />
+        <Word words={this.props.words} filterMode={this.props.filterMode} />
       </View>
     );
   }

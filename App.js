@@ -29,6 +29,23 @@ const store = createStore((state = defaultStore, action) => {
     });
     return {...state, words: newWords};
   }
+  if (action.type === 'REMOVE_WORD') {
+    const newWords = state.words.filter((word) => {
+      if (word.id === action.item.id) {
+        return false;
+      }
+      return true;
+    });
+    return {...state, words: newWords};
+  }
+  if (action.type === 'ADD_WORD') {
+    const newWords = Object.assign([], state.words);
+    newWords.unshift(action.word);
+    return {...state, words: newWords};
+  }
+  if (action.type === 'SET_FILTER_MODE') {
+    return {...state, filterMode: action.filterMode};
+  }
   return state;
 });
 

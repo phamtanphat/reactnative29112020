@@ -7,8 +7,9 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
+import {connect} from 'react-redux';
 
-export default class Form extends Component {
+class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,8 +18,8 @@ export default class Form extends Component {
       txtVn: '',
     };
   }
- 
-  addWord = () =>{
+
+  addWord = () => {
     const {txtEn, txtVn} = this.state;
     if (txtEn.length <= 0 || txtVn.length <= 0) {
       alert('Bạn chưa nhập đủ thông tin');
@@ -30,10 +31,9 @@ export default class Form extends Component {
       vn: txtVn,
       isMemorized: false,
     };
-    this.props.onAddWord(newWord, () => {
-      this.textInputEn.clear();
-      this.textInputVn.clear();
-    });
+    this.props.dispatch({type: 'ADD_WORD', word: newWord});
+    this.textInputEn.clear();
+    this.textInputVn.clear();
   };
 
   toggleForm = () => {
@@ -58,7 +58,7 @@ export default class Form extends Component {
             />
           </View>
           <View style={styles.containerTouchable}>
-            <TouchableOpacity 
+            <TouchableOpacity
               onPress={this.addWord}
               style={styles.touchableAddword}>
               <Text style={styles.textTouchable}>Add word</Text>
@@ -73,7 +73,7 @@ export default class Form extends Component {
       );
     } else {
       return (
-        <TouchableOpacity 
+        <TouchableOpacity
           onPress={() => this.toggleForm()}
           style={styles.buttonOpenForm}>
           <Text style={styles.textOpenForm}>+</Text>
@@ -86,6 +86,7 @@ export default class Form extends Component {
   }
 }
 
+export default connect()(Form);
 const styles = StyleSheet.create({
   containerTextInput: {
     width: '100%',
