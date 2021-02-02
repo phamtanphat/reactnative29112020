@@ -1,32 +1,13 @@
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
-} from 'react-native';
-import RNPickerSelect from 'react-native-picker-select';
+import {View, StyleSheet} from 'react-native';
 import Word from '../components/Word';
 import Form from '../components/Form';
 import Filter from '../components/Filter';
+import {connect} from 'react-redux';
 
-export default class MainScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      words: [
-        {id: 1, en: 'One', vn: 'Một', isMemorized: false},
-        {id: 2, en: 'Two', vn: 'Hai', isMemorized: true},
-        {id: 3, en: 'Three', vn: 'Ba', isMemorized: true},
-        {id: 4, en: 'Four', vn: 'Bốn', isMemorized: false},
-        {id: 5, en: 'Five', vn: 'Năm', isMemorized: true},
-      ].reverse(),
-      filterMode: 'Show_All',
-    };
-  }
+class MainScreen extends Component {
   onToggleWord = (item) => {
     const newWords = this.state.words.map((word) => {
       if (word.id === item.id) {
@@ -62,18 +43,22 @@ export default class MainScreen extends Component {
         <Form onAddWord={this.onAddWord} />
         <Filter
           onSetFilterMode={this.onSetFilterMode}
-          filterMode={this.state.filterMode}
+          filterMode={this.props.filterMode}
         />
         <Word
           onRemoveWord={this.onRemoveWord}
           onToggleWord={this.onToggleWord}
-          words={this.state.words}
-          filterMode={this.state.filterMode}
+          words={this.props.words}
+          filterMode={this.props.filterMode}
         />
       </View>
     );
   }
 }
+
+export default connect(function (state) {
+  return {words: state.words, filterMode: state.filterMode};
+})(MainScreen);
 
 const styles = StyleSheet.create({
   container: {
