@@ -14,7 +14,6 @@ export default class Word extends PureComponent {
             item={item}
             onRemoveWord={this.props.onRemoveWord}
             filterMode={this.props.filterMode}
-            onToggleWord={this.props.onToggleWord}
           />
         )}
         ItemSeparatorComponent={() => {

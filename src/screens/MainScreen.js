@@ -8,15 +8,6 @@ import Filter from '../components/Filter';
 import {connect} from 'react-redux';
 
 class MainScreen extends Component {
-  onToggleWord = (item) => {
-    const newWords = this.state.words.map((word) => {
-      if (word.id === item.id) {
-        return {...word, isMemorized: !item.isMemorized};
-      }
-      return word;
-    });
-    this.setState({words: newWords});
-  };
   onRemoveWord = (item) => {
     const newWords = this.state.words.filter((word) => {
       if (word.id === item.id) {
@@ -47,7 +38,6 @@ class MainScreen extends Component {
         />
         <Word
           onRemoveWord={this.onRemoveWord}
-          onToggleWord={this.onToggleWord}
           words={this.props.words}
           filterMode={this.props.filterMode}
         />

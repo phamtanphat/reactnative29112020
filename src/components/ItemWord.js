@@ -2,13 +2,14 @@
 import React, {Component} from 'react';
 import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
 import {getWidth} from '../helpers/AppDimension';
+import {connect} from 'react-redux';
 
-export default class ItemWord extends Component {
+class ItemWord extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     if (nextProps.item.isMemorized !== this.props.item.isMemorized) {
       return true;
     }
-    if (nextProps.filterMode !== this.props.filterMode){
+    if (nextProps.filterMode !== this.props.filterMode) {
       return true;
     }
     return false;
@@ -31,7 +32,7 @@ export default class ItemWord extends Component {
           </View>
           <View style={styles.groupHorizontal}>
             <TouchableOpacity
-              onPress={() => this.props.onToggleWord(item)}
+              onPress={() => this.props.dispatch({type: 'TOGGLE_WORD', item})}
               style={{
                 ...styles.buttonMemorize,
                 backgroundColor: item.isMemorized ? 'green' : 'red',
@@ -54,6 +55,8 @@ export default class ItemWord extends Component {
     return this.renderItemWord(this.props.item);
   }
 }
+
+export default connect()(ItemWord);
 
 const styles = StyleSheet.create({
   groupWord: {
