@@ -17,10 +17,36 @@ const defaultWord = [
 ].reverse();
 
 function wordReducer(state = defaultWord, action) {
+  if (action.type === 'TOGGLE_WORD') {
+    const newWords = state.map((word) => {
+      if (word.id === action.item.id) {
+        return {...word, isMemorized: !action.item.isMemorized};
+      }
+      return word;
+    });
+    return newWords;
+  }
+  if (action.type === 'REMOVE_WORD') {
+    const newWords = state.filter((word) => {
+      if (word.id === action.item.id) {
+        return false;
+      }
+      return true;
+    });
+    return newWords;
+  }
+  if (action.type === 'ADD_WORD') {
+    const newWords = Object.assign([], state);
+    newWords.unshift(action.word);
+    return newWords;
+  }
   return state;
 }
 
 function filterModeReducer(state = 'Show_All', action) {
+  if (action.type === 'SET_FILTER_MODE') {
+    return action.filterMode;
+  }
   return state;
 }
 
@@ -42,31 +68,3 @@ export default class App extends Component {
     );
   }
 }
-
-// if (action.type === 'TOGGLE_WORD') {
-//   const newWords = state.words.map((word) => {
-//     if (word.id === action.item.id) {
-//       return {...word, isMemorized: !action.item.isMemorized};
-//     }
-//     return word;
-//   });
-//   return {...state, words: newWords};
-// }
-// if (action.type === 'REMOVE_WORD') {
-//   const newWords = state.words.filter((word) => {
-//     if (word.id === action.item.id) {
-//       return false;
-//     }
-//     return true;
-//   });
-//   return {...state, words: newWords};
-// }
-// if (action.type === 'ADD_WORD') {
-//   const newWords = Object.assign([], state.words);
-//   newWords.unshift(action.word);
-//   return {...state, words: newWords};
-// }
-// if (action.type === 'SET_FILTER_MODE') {
-//   return {...state, filterMode: action.filterMode};
-// }
-// return state;
