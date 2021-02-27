@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
 import {getWidth} from '../helpers/AppDimension';
 import {connect} from 'react-redux';
+import * as actionCreators from '../redux/actions/actionCreators';
 
 class ItemWord extends Component {
   shouldComponentUpdate(nextProps, nextState) {
@@ -32,7 +33,7 @@ class ItemWord extends Component {
           </View>
           <View style={styles.groupHorizontal}>
             <TouchableOpacity
-              onPress={() => this.props.dispatch({type: 'TOGGLE_WORD', item})}
+              onPress={() => this.props.toggleWord(item)}
               style={{
                 ...styles.buttonMemorize,
                 backgroundColor: item.isMemorized ? 'green' : 'red',
@@ -56,7 +57,7 @@ class ItemWord extends Component {
   }
 }
 
-export default connect()(ItemWord);
+export default connect(null, actionCreators)(ItemWord);
 
 const styles = StyleSheet.create({
   groupWord: {

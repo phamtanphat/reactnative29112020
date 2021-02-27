@@ -8,19 +8,16 @@ import axios from 'axios';
 
 export default class App extends Component {
   componentDidMount() {
-    const url = 'https://servernode29122020.herokuapp.com/word';
-    const params = new URLSearchParams();
-    params.append('en', 'Four');
-    params.append('vn', 'Bốn');
+    // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+    // const url = 'https://servernode29122020.herokuapp.com/word';
+    // const params = new URLSearchParams();
+    // params.append('en', 'Four');
+    // params.append('vn', 'Bốn');
 
-    axios
-      .post(url, params, {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      })
-      .then((response) => console.log(response.data))
-      .catch((error) => console.log(error));
+    // axios
+    //   .post(url, params)
+    //   .then((response) => console.log(response.data))
+      // .catch((error) => console.log(error));
   }
 
   render() {
