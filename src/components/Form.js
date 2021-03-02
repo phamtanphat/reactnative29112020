@@ -8,6 +8,7 @@ import {
   TextInput,
 } from 'react-native';
 import {connect} from 'react-redux';
+import * as actionCreators from '../redux/actions/actionCreators';
 
 class Form extends Component {
   constructor(props) {
@@ -31,7 +32,7 @@ class Form extends Component {
       vn: txtVn,
       isMemorized: false,
     };
-    this.props.dispatch({type: 'ADD_WORD', word: newWord});
+    this.props.addWord(newWord);
     this.textInputEn.clear();
     this.textInputVn.clear();
   };
@@ -86,7 +87,7 @@ class Form extends Component {
   }
 }
 
-export default connect()(Form);
+export default connect(null, actionCreators)(Form);
 const styles = StyleSheet.create({
   containerTextInput: {
     width: '100%',
