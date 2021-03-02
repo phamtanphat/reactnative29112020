@@ -1,15 +1,11 @@
-const defaultWord = [
-  {id: 1, en: 'One', vn: 'Một', isMemorized: false},
-  {id: 2, en: 'Two', vn: 'Hai', isMemorized: true},
-  {id: 3, en: 'Three', vn: 'Ba', isMemorized: true},
-  {id: 4, en: 'Four', vn: 'Bốn', isMemorized: false},
-  {id: 5, en: 'Five', vn: 'Năm', isMemorized: true},
-].reverse();
 
-export default function wordReducer(state = defaultWord, action) {
+export default function wordReducer(state = [], action) {
+  if (action.type === 'FETCH_WORDS') {
+    return action.words;
+  }
   if (action.type === 'TOGGLE_WORD') {
     const newWords = state.map((word) => {
-      if (word.id === action.item.id) {
+      if (word._id === action.item._id) {
         return {...word, isMemorized: !action.item.isMemorized};
       }
       return word;
@@ -18,7 +14,7 @@ export default function wordReducer(state = defaultWord, action) {
   }
   if (action.type === 'REMOVE_WORD') {
     const newWords = state.filter((word) => {
-      if (word.id === action.item.id) {
+      if (word._id === action.item._id) {
         return false;
       }
       return true;

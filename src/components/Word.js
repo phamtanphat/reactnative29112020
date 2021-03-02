@@ -8,7 +8,7 @@ export default class Word extends PureComponent {
     return (
       <FlatList
         data={this.props.words}
-        keyExtractor={(item, index) => item.id.toString()}
+        keyExtractor={(item, index) => item._id.toString()}
         renderItem={({item, index}) => (
           <ItemWord
             item={item}

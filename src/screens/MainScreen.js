@@ -6,8 +6,12 @@ import Word from '../components/Word';
 import Form from '../components/Form';
 import Filter from '../components/Filter';
 import {connect} from 'react-redux';
+import * as actionCreator from '../redux/actions/actionCreators';
 
 class MainScreen extends Component {
+  componentDidMount() {
+    this.props.fetchWords();
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -21,7 +25,7 @@ class MainScreen extends Component {
 
 export default connect(function (state) {
   return {words: state.words, filterMode: state.filterMode};
-})(MainScreen);
+}, actionCreator)(MainScreen);
 
 const styles = StyleSheet.create({
   container: {
