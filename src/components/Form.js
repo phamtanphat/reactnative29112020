@@ -26,13 +26,7 @@ class Form extends Component {
       alert('Bạn chưa nhập đủ thông tin');
       return;
     }
-    const newWord = {
-      id: Math.random(),
-      en: txtEn,
-      vn: txtVn,
-      isMemorized: false,
-    };
-    this.props.addWord(newWord);
+    this.props.addWord(txtEn, txtVn);
     this.textInputEn.clear();
     this.textInputVn.clear();
   };

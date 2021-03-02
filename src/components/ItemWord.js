@@ -33,7 +33,7 @@ class ItemWord extends Component {
           </View>
           <View style={styles.groupHorizontal}>
             <TouchableOpacity
-              onPress={() => this.props.toggleWord(item)}
+              onPress={() => this.props.toggleWord(item._id, !item.isMemorized)}
               style={{
                 ...styles.buttonMemorize,
                 backgroundColor: item.isMemorized ? 'green' : 'red',
@@ -43,7 +43,7 @@ class ItemWord extends Component {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => this.props.removeWord(item)}
+              onPress={() => this.props.removeWord(item._id)}
               style={styles.buttonRemove}>
               <Text style={styles.textRemove}>Remove</Text>
             </TouchableOpacity>
